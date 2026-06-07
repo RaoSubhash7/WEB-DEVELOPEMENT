@@ -1,10 +1,12 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef} from "react";
 
 function App() {
   const [password, setPassword] = useState("");
   const [length, setLength] = useState(10);
   const [isCharAllowed, setIsCharAllowed] = useState(false);
   const [isNumberAllowed, setIsNumberAllowed] = useState(false);
+
+  const passwordRef = useRef(null);
 
   const passwordGenerator = useCallback(() => {
     let pass = "";
@@ -48,6 +50,7 @@ function App() {
           value={password}
           readOnly
           placeholder="Generated Password"
+          ref={passwordRef}
         />
 
         <button
