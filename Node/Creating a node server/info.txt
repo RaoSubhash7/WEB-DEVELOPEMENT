@@ -1,0 +1,11 @@
+| **HTTP Method** | **Purpose**                                                              |
+| --------------- | ------------------------------------------------------------------------ |
+| **GET**         | Retrieve (fetch) data from the server.                                   |
+| **POST**        | Create a new resource or send data to the server.                        |
+| **PUT**         | Replace or completely update an existing resource.                       |
+| **PATCH**       | Partially update an existing resource.                                   |
+| **DELETE**      | Remove a resource from the server.                                       |
+| **HEAD**        | Retrieve only the response headers (without the response body).          |
+| **OPTIONS**     | Return the HTTP methods supported by the server for a specific resource. |
+| **CONNECT**     | Establish a tunnel connection through a proxy server.                    |
+| **TRACE**       | Echo the received request for debugging and diagnostic purposes.         |
