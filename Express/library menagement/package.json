@@ -1,0 +1,19 @@
+{
+  "name": "library-menagement",
+  "version": "1.0.0",
+  "description": "This is a library managment API Backend for the managment of users and the books",
+  "license": "ISC",
+  "author": "Subhash",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
