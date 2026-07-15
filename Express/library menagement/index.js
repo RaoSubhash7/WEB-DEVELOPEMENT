@@ -10,13 +10,7 @@ app.use(express.json());
 
 app.use('/user', userRouter);
 app.use('/books', booksRouter);
-/*
-Router ->  /users/{id}
-GET: Get a user subscription details by their ID >> Date of subscription >>
- Valid till ? >> Fine if any ?
-Access: public
-Parameter: id
-*/
+
 
 app.listen(port, () => {
     console.log(`server is running on port http://localhost:${port}`)
