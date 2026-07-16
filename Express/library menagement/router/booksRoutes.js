@@ -1,5 +1,6 @@
 const express = require('express');
 const books = require('../data/books.json')
+const user = require('../data/user.json')
 
 const router = express.Router();
 
@@ -104,4 +105,28 @@ router.put('/:id',(req,res)=>{
     })
 
 })
+/*
+Router ->  /books/{id}
+DELETE: Delete a book by its ID
+Access: public
+Parameter: id 
+*/
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    const bookIndex = books.findIndex((each) => each.id === id);
+
+    if (bookIndex === -1) {
+        return res.status(404).json({
+            success: false,
+            message: `Book not Found for id ${id}`
+        });
+    }
+
+    books.splice(bookIndex, 1);
+    res.status(200).json({
+        success: true,
+        message: "Book deleted successfully"
+    });
+});
+
 module.exports = router;
