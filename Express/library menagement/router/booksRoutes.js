@@ -1,6 +1,6 @@
 const express = require('express');
 const books = require('../data/books.json')
-const user = require('../data/user.json')
+const users = require('../data/user.json')
 
 const router = express.Router();
 
@@ -128,5 +128,47 @@ router.delete('/:id', (req, res) => {
         message: "Book deleted successfully"
     });
 });
+/*
+Router ->  /books/issued
+GET: Get all issued books
+Access: public
+Parameter: none
+*/
+router.get('/issued/for-users', (req, res) => {
 
+    const usersWithIssuedBooks = users.filter((each) => each.issuedBook);
+
+    const issuedBooks = [];
+
+    usersWithIssuedBooks.forEach((each) => {
+
+        const book = books.find((book) => book.id === each.issuedBook);
+
+        // Agar book nahi mili to next user par chale jao
+        if (!book) return;
+
+        issuedBooks.push({
+            ...book,
+            issuedBy: each.name,
+            issuedDate: each.issuedDate,
+            returnDate: each.returnDate
+        });
+
+    });
+
+    if (issuedBooks.length === 0) {
+        return res.status(404).json({
+            success: false,
+            message: "No Books issued yet"
+        });
+    }
+
+    return res.status(200).json({
+        success: true,
+        data: issuedBooks
+    });
+
+});
+
+module.exports = router;
 module.exports = router;
