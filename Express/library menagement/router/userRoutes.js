@@ -137,6 +137,99 @@ router.delete('/:id',(req,res)=>{
         message: "User deleted successfully"
     })
 }) 
+
+
+/* ### Subscription Types
+
+    >> Basic (3 months)
+    >> Standard (6 months)
+    >> Premium (12 months)
+*/
+
+router.get('/subscription-types/:id', (req, res) => {
+
+    const id = Number(req.params.id);
+
+    const subscriptionTypes = [
+        {
+            id: 1,
+            type: "Basic",
+            duration: "3 Months",
+            days: 90
+        },
+        {
+            id: 2,
+            type: "Standard",
+            duration: "6 Months",
+            days: 180
+        },
+        {
+            id: 3,
+            type: "Premium",
+            duration: "12 Months",
+            days: 365
+        }
+    ];
+
+    const subscription = subscriptionTypes.find(
+        (each) => each.id === id
+    );
+
+    if (!subscription) {
+        return res.status(404).json({
+            success: false,
+            message: "Subscription Type Not Found"
+        });
+    }
+
+    return res.status(200).json({
+        success: true,
+        data: {
+            ...subscription,
+            expiryInDays: getSubscriptionExpiry(subscription.type)
+        }
+    });
+
+});
+
+/*
+Convert Date into Number of Days
+*/
+
+const getDateInDays = (date = "") => {
+
+    let currentDate;
+
+    if (date) {
+        currentDate = new Date(date);
+    } else {
+        currentDate = new Date();
+    }
+
+    return Math.floor(currentDate.getTime() / (1000 * 60 * 60 * 24));
+
+};
+
+/*
+Calculate Subscription Expiry
+*/
+
+const getSubscriptionExpiry = (subscriptionType) => {
+
+    let date = getDateInDays();
+
+    if (subscriptionType === "Basic") {
+        date += 90;
+    } else if (subscriptionType === "Standard") {
+        date += 180;
+    } else if (subscriptionType === "Premium") {
+        date += 365;
+    }
+
+    return date;
+
+};
+
 //This is the end of the userRoutes.js file. It defines various routes for
 //  managing users in a library management system, including getting all users, 
 // creating a new user, retrieving a user by ID, updating a user, and deleting a user.

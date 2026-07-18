@@ -170,5 +170,11 @@ router.get('/issued/for-users', (req, res) => {
 
 });
 
+/* ### Subscription Types
+
+    >> Basic (3 months)
+    >> Standard (6 months)
+    >> Premium (12 months)
+    */
 module.exports = router;
 module.exports = router;
